@@ -9,13 +9,16 @@ import me.bumsoo.springbootdeveloper.domain.Article;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 public class AddArticleRequest {
     private String title;
+
     private String content;
 
-    public Article toEntity(){
-        return Article.builder().title(title).content(content).build();
+    public Article toEntity(String author) {
+        return Article.builder()
+                .title(title)
+                .content(content)
+                .author(author)
+                .build();
     }
-
 }

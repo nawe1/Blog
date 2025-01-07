@@ -28,14 +28,26 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "nickname", unique = true)
+    private String nickname;
+
     @Builder
-    public User(String email, String password, String auth){
+    public User(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
     }
 
+    public User update(String nickname) {
+        this.nickname = nickname;
+
+        return this;
+    }
+
+
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("user"));
     }
 
@@ -50,7 +62,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired(){
+    public boolean isAccountNonExpired() {
         return true;
     }
 
@@ -60,12 +72,12 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isCredentialsNonExpired(){
+    public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return true;
     }
 }
